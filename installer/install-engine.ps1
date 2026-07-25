@@ -9,5 +9,33 @@ if (!(Test-Path $enginePath)) {
 }
 
 
-Write-Host "Engine folder ready."
-Write-Host "Next: engine files will be installed."
+$files = @(
+    "randomEngine.js",
+    "templateEngine.js",
+    "answerEngine.js",
+    "questionEngine.js",
+    "difficultyEngine.js"
+)
+
+
+foreach ($file in $files) {
+
+    $filePath = Join-Path $enginePath $file
+
+    if (!(Test-Path $filePath)) {
+
+        New-Item -ItemType File -Path $filePath | Out-Null
+
+        Write-Host "Created: $file"
+
+    }
+    else {
+
+        Write-Host "Exists: $file"
+
+    }
+
+}
+
+
+Write-Host "Engine installation complete."
